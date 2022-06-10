@@ -11,7 +11,7 @@ $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
     </head>
     <body>
         <?php include ($DOCUMENT_ROOT."/front_end/vista/header.php"); ?>
-        <div id="printImport"> <!-- contenido de la página --> </div>
+        <div id="printImport">test <!-- contenido de la página --> </div>
         <?php include ($DOCUMENT_ROOT."/front_end/vista/footer.php"); ?>
     </body>
 </html>
