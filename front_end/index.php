@@ -15,3 +15,11 @@ $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
         <?php include ($DOCUMENT_ROOT."/front_end/vista/footer.php"); ?>
     </body>
 </html>
+
+<script type="text/javascript">
+
+var x = global.funciones.vista.cargaResultado.FormularioCargaResultados();
+document.querySelector("#printImport").appendChild(x.div);
+
+
+</script>

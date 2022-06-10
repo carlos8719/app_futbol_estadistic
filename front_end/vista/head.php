@@ -12,9 +12,17 @@ $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
 <script type="text/javascript" src="/front_end/vista/general.js"></script>
 <script type="text/javascript" src="/front_end/controlador/general.js"></script>
 <script type="text/javascript" src="/front_end/modelo/general.js"></script>
+
+<script type="text/javascript" src="/front_end/vista/cargaResultados.js"></script>
+<script type="text/javascript" src="/front_end/controlador/cargaResultados.js"></script>
+<script type="text/javascript" src="/front_end/modelo/cargaResultados.js"></script>
+
+
 <!-- login -->
 <script type="text/javascript" src="/front_end/vista/login.js"></script>
 
+<!-- libreria externa -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/papaparse@5.3.1/papaparse.min.js"></script>
 
 <!-- clases -->
 <!-- general -->

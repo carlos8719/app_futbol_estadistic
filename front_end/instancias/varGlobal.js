@@ -1,7 +1,7 @@
 
 var global = {
     "funciones":{}
-    ,"variables_globales_":{}
+    ,"variables_globales":{}
 };
 global.funciones.vista = {};
 global.funciones.controlador = {};
