@@ -31,7 +31,7 @@ if(
             // equipo local
             // equipo visitante
     }
-    return json_encode($result);
+    echo json_encode($result,JSON_PARTIAL_OUTPUT_ON_ERROR);
 }
 
  ?>
