@@ -1,3 +1,3 @@
-<?
-    include $_SERVER['DOCUMENT_ROOT']."/app_apuestas/front_end/index.php";
+<?php
+    include ($_SERVER['DOCUMENT_ROOT']."/front_end/index.php");
 ?>

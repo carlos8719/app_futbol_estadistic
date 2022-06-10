@@ -1,4 +1,5 @@
-<?
+
+<?php
 $DOCUMENT_HTTP = "http".(isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!="off"?"s":"")."://".$_SERVER["SERVER_NAME"];
 $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
 ?>
@@ -6,13 +7,11 @@ $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
     <head>
-        <?php include "/vista/head.php" ?>
+        <?php include ($DOCUMENT_ROOT."/front_end/vista/head.php"); ?>
     </head>
     <body>
-        <script type="text/javascript">
-            let x = generar_estructura_login();
-            document.body.appendChild(x.estructuraLogin);
-        </script>
-        <?php include "/vista/footer.php" ?>
+        <?php include ($DOCUMENT_ROOT."/front_end/vista/header.php"); ?>
+        <div id="printImport"> <!-- contenido de la página --> </div>
+        <?php include ($DOCUMENT_ROOT."/front_end/vista/footer.php"); ?>
     </body>
 </html>

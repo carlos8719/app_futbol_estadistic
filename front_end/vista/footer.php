@@ -1,2 +1,2 @@
 
-<?php  echo "<br> footer";   ?>
+<?php  echo "footer";   ?>
