@@ -3,7 +3,7 @@
 function conectar(){
     /*conexion*/
     try {
-        $conexion = new PDO("mysql:host=localhost;dbname=estudioapuestas", "root", "");
+        $conexion = new PDO("mysql:host=localHost;dbname=estudioapuestas", "root", "");
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // echo "Conexión realizada Satisfactoriamente";
     } catch(PDOException $e){
