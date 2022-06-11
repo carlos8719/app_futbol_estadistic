@@ -1,5 +1,4 @@
 <?php
-
 $DOCUMENT_HTTP = "http".(isset($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!="off"?"s":"")."://".$_SERVER["SERVER_NAME"];
 $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
 
@@ -16,11 +15,11 @@ if(
     include($DOCUMENT_ROOT."/back_end/cnn/cnn.php");
     $conexion = conectar();
 
-    $liga_name= $_POST['liga'];
+    $liga_name= json_decode($_POST['liga'],true);
 
-    $sql = "SELECT id ";
-    $sql .= "FROM ligas ";
-    $sql .= "WHERE nombre_liga = '".$liga_name."'";
+    $sql = 'SELECT id ';
+    $sql .= 'FROM ligas ';
+    $sql .= 'WHERE nombre_liga = "'.$liga_name.'"';
     try {
         $query = $conexion->prepare($sql);
         $query->execute();

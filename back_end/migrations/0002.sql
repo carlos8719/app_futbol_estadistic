@@ -26,5 +26,5 @@ INSERT INTO `ligas` (`id`, `nombre_liga`, `id_pais`, `fecha_modificado`, `elimin
 INSERT INTO `ligas` (`id`, `nombre_liga`, `id_pais`, `fecha_modificado`, `eliminado`) VALUES (11, 'Championschip', 6, '2022-06-04 21:20:50', 0);
 INSERT INTO `ligas` (`id`, `nombre_liga`, `id_pais`, `fecha_modificado`, `eliminado`) VALUES (9, 'Premier League', 6, '2022-06-04 21:20:01', 0);
 INSERT INTO `ligas` (`id`, `nombre_liga`, `id_pais`, `fecha_modificado`, `eliminado`) VALUES (20, 'Eridivisie', 7, '2022-06-04 21:25:36', 0);
-INSERT INTO `ligas` (`id`, `nombre_liga`, `id_pais`, `fecha_modificado`, `eliminado`) VALUES (13, 'Portugal  Liiga', 8, '2022-06-04 21:21:49', 0);
+INSERT INTO `ligas` (`id`, `nombre_liga`, `id_pais`, `fecha_modificado`, `eliminado`) VALUES (13, 'Portugal Liga', 8, '2022-06-04 21:21:49', 0);
 INSERT INTO `ligas` (`id`, `nombre_liga`, `id_pais`, `fecha_modificado`, `eliminado`) VALUES (17, 'Bundesliga', 9, '2022-06-04 21:24:22', 0);

@@ -41,13 +41,13 @@ class ControladorCargaResultado {
 
             if(i.local_gc_descanso + i.local_gf_descanso == 1){
                 i.mas_05_descanso = 1;
-                i.mas_05_descanso = 0;
+                i.mas_15_descanso = 0;
             }else if(i.local_gc_descanso + i.local_gf_descanso > 1){
                 i.mas_05_descanso = 1;
                 i.mas_15_descanso = 1;
             }else{
                 i.mas_05_descanso = 0;
-                i.mas_05_descanso = 0;
+                i.mas_15_descanso = 0;
             }
             if(i.local_gc_final + i.local_gf_final == 2){
                 i.mas_15_final = 1;

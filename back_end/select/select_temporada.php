@@ -16,12 +16,13 @@ if(
     include($DOCUMENT_ROOT."/back_end/cnn/cnn.php");
     $conexion = conectar();
 
-    $temporada_fecha= $_POST['temporada'];
+    $temporada_fecha= json_decode($_POST['temporada'],true);
 
     $sql = "SELECT id ";
     $sql .= "FROM temporadas ";
     $sql .= "WHERE temporada_fecha = '".$temporada_fecha."'";
     try {
+
         $query = $conexion->prepare($sql);
         $query->execute();
         $res_temporada_fecha = $query->fetch(PDO::FETCH_ASSOC);
