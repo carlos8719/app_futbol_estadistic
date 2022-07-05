@@ -82,79 +82,115 @@ function crear_boton_descarga(){
 }
 function crear_tabla(obj_partidos_hoy){
 
+    //filtrar el obj solo con las ligas que usamos!
+    filtrar_ligas(obj_partidos_hoy);
     // crear excel
     let obj_pintar = update_obj_resultados_descanso(obj_partidos_hoy);
-    // console.info(obj_pintar);
-    obj_liga = obj_partidos_hoy;
 
-
-        let data = {};
-        var formData = new FormData();
-        formData.append('csvResultados',JSON.stringify(data));
-        fetch(window.location.protocol.replace("s","")+'//appestadisc.local/back_end/insert/test.php', {
-          method: "POST",
-          mode: 'cors',
-          body:formData
-        })
-        .then(response => response.json())
-        .then(data=>{
-            console.info(data);
-        })
-        .catch(err => console.log(err));
-
+    console.info(obj_pintar);
 
     //CREAR LA TABLA
-    // var csv_exportar = [];
-    // csv_exportar.push(["Partidos y Cuotas"]);
-    // csv_exportar.push(["FECHA",obj_pintar.fecha]);
-    // Object.values(obj_pintar.liga).forEach(function(c){
-    //     csv_exportar.push([c.pais,c.competicion]);
-    //     csv_exportar.push(["TIEMPO","EQUIPO CASA","EQUIPO FUERA","RESULTADO","R DESCANSO", "1","X","2"]);
-    //     Object.values(c.partidos).forEach(function(d){
-    //         let res_descanso = "";
-    //         if(typeof d.resultado_descanso == "undefined" ){
-    //             res_descanso = "Sin comenzar";
-    //         }else{
-    //             res_descanso = d.resultado_descanso;
-    //
-    //         }
-    //         let cuota_casa = "";
-    //         let cuota_empate = "";
-    //         let cuota_visitante = "";
-    //         if(d.cuota_casa== "NaN" || d.cuota_empate== "NaN" || d.cuota_visitante== "NaN"){
-    //             cuota_casa = "-";
-    //             cuota_empate = "-";
-    //             cuota_visitante = "-";
-    //         }else{
-    //             cuota_casa = d.cuota_casa;
-    //             cuota_empate = d.cuota_empate;
-    //             cuota_visitante = d.cuota_visitante;
-    //         }
-    //         csv_exportar.push([
-    //             d.hora
-    //             ,d.equipo_casa
-    //             ,d.equipo_visitante
-    //             ,"("+(d.resultado_casa+" - "+d.resultado_visitante).toString()+")"
-    //             ,res_descanso
-    //             ,cuota_casa
-    //             ,cuota_empate
-    //             ,cuota_visitante
-    //         ]);
-    //     });
-    // });
-    // let csvContent = "data:text/csv;charset=UTF-8,";
-    // csv_exportar.forEach(function(rowArray){
-    //    let row = rowArray.join(";");
-    //    csvContent += row + "\r\n";
-    // });
-    // var encodedUri = encodeURI(csvContent);
-    // var link = document.createElement("a");
-    // link.setAttribute("href", encodedUri);
-    // link.setAttribute("download",
-    //     "partidos_cuotas_flashscore_"+obj_pintar.fecha.replace(" ","_")+"_.csv"
-    // );
-    // document.body.appendChild(link); // Required for FF
-    // link.click();
+
+    var csv_exportar = [];
+    csv_exportar.push([
+        "fecha_partido"
+        ,"id_ligas"
+        ,"equipo_local"
+        ,"equipo_visitante"
+        ,"resultado_final"
+        ,"resultado_descanso"
+        ,"cuota_1"
+        ,"cuota_x"
+        ,"cuota_2"
+        ,"resultado_final_signo"
+        ,"resultado_descanso_signo"
+        ,"mas_05_descanso"
+        ,"mas_15_descanso"
+        ,"mas_25_final"
+        ,"ambos_marcan"
+        ,"temporadas_id"
+        ,"goles_ambas_partes"
+        ,"diferencia_goles_descanso_final"
+        ,"mas_15_final"
+        ,"local_gf_final"
+        ,"local_gc_final"
+        ,"visitante_gf_final"
+        ,"visitante_gc_final"
+        ,"local_gf_descanso"
+        ,"local_gc_descanso"
+        ,"visitante_gf_descanso"
+        ,"visitante_gc_descanso"
+    ]);
+
+    Object.values(obj_pintar.liga).forEach(function(c){
+        let liga = c.competicion;
+        let pais = c.pais;
+        let fecha = c.fecha;
+        Object.values(c.partidos).forEach(function(d){
+            let res_descanso = "";
+            if(typeof d.resultado_descanso == "undefined" ){
+                res_descanso = "Sin comenzar";
+            }else{
+                res_descanso = d.resultado_descanso;
+
+            }
+            let cuota_casa = "";
+            let cuota_empate = "";
+            let cuota_visitante = "";
+            if(d.cuota_casa== "NaN" || d.cuota_empate== "NaN" || d.cuota_visitante== "NaN"){
+                cuota_casa = "-";
+                cuota_empate = "-";
+                cuota_visitante = "-";
+            }else{
+                cuota_casa = d.cuota_casa;
+                cuota_empate = d.cuota_empate;
+                cuota_visitante = d.cuota_visitante;
+            }
+            csv_exportar.push([
+                    fecha
+                    ,liga
+                    ,d.equipo_casa
+                    ,d.equipo_visitante
+                    ,"resultado_final"
+                    ,"resultado_descanso"
+                    ,"cuota_1"
+                    ,"cuota_x"
+                    ,"cuota_2"
+                    ,"resultado_final_signo"
+                    ,"resultado_descanso_signo"
+                    ,"mas_05_descanso"
+                    ,"mas_15_descanso"
+                    ,"mas_25_final"
+                    ,"ambos_marcan"
+                    ,"temporadas_id"
+                    ,"goles_ambas_partes"
+                    ,"diferencia_goles_descanso_final"
+                    ,"mas_15_final"
+                    ,"local_gf_final"
+                    ,"local_gc_final"
+                    ,"visitante_gf_final"
+                    ,"visitante_gc_final"
+                    ,"local_gf_descanso"
+                    ,"local_gc_descanso"
+                    ,"visitante_gf_descanso"
+                    ,"visitante_gc_descanso"
+            ]);
+        });
+    });
+
+    let csvContent = "data:text/csv;charset=UTF-8,";
+    csv_exportar.forEach(function(rowArray){
+       let row = rowArray.join(";");
+       csvContent += row + "\r\n";
+    });
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download",
+        "partidos_cuotas_flashscore_"+obj_pintar.fecha.replace(" ","_")+"_.csv"
+    );
+    document.body.appendChild(link); // Required for FF
+    link.click();
 }
 function crear_obj(){
     let liga = -1;
@@ -350,6 +386,10 @@ function lanzar_funcion(){
     document.querySelector("#luna_dowload").style.display = "none";
     document.querySelectorAll(".filters__tab")[0].click();
     console.info("Excel descargado!");
+}
+
+function filtrar_ligas(obj_ligas){
+    return obj_ligas;
 }
 
 //ejecucion
