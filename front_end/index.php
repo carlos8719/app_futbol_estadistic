@@ -18,8 +18,8 @@ $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
 
 <script type="text/javascript">
 
-var x = global.funciones.vista.cargaResultado.FormularioCargaResultados();
-document.querySelector("#printImport").appendChild(x.div);
+// var x = global.funciones.vista.cargaResultado.FormularioCargaResultados();
+// document.querySelector("#printImport").appendChild(x.div);
 
 
 </script>
