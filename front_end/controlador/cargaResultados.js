@@ -7,6 +7,7 @@ class ControladorCargaResultado {
             complete: function(results){
                 global.variables_globales.csv_resultados = results.data;
                 global.funciones.controlador.cargaResultado.corregirObjResultados();
+                global.funciones.modelo.cargaResultado.insertResultadosCsv();
             }
         });
     }
@@ -63,9 +64,5 @@ class ControladorCargaResultado {
 
             i.fecha_partido = global.funciones.controlador.general.formatear_fecha(i.fecha_partido);
         });
-
-        global.funciones.modelo.cargaResultado.insertResultadosCsv(
-            global.variables_globales.csv_resultados
-        );
     }
 }

@@ -21,7 +21,7 @@ if(
     $partido = json_decode($_POST['partidos'],true);
 
 
-    $sql = "INSERT INTO resultados(fecha_partido, id_ligas, equipo_local, equipo_visitante, resultado_descanso, resultado_final, resultado_final_signo, resultado_descanso_signo, cuota_1, cuota_x, cuota_2, mas_05_descanso, mas_15_descanso, mas_15_final, mas_25_final, ambos_marcan, temporadas_id, goles_ambas_partes, diferencia_goles_descanso_final, local_gf_descanso, local_gc_descanso, visitante_gf_descanso, visitante_gc_descanso, local_gf_final, local_gc_final, visitante_gf_final, visitante_gc_final) ";
+    $sql = "INSERT INTO resultados(fecha_partido, id_ligas, equipo_local, equipo_visitante, resultado_descanso, resultado_final, resultado_final_signo, resultado_descanso_signo, cuota_1, cuota_x, cuota_2, mas_05_descanso, mas_15_descanso, mas_15_final, mas_25_final, ambos_marcan, temporadas_id, goles_ambas_partes, diferencia_goles_descanso_final_local,diferencia_goles_descanso_final_visitante, local_gf_descanso, local_gc_descanso, visitante_gf_descanso, visitante_gc_descanso, local_gf_final, local_gc_final, visitante_gf_final, visitante_gc_final) ";
     $sql.= " VALUES ( ";
     $sql.= "'".$partido["fecha_partido"]."'";
     $sql.=",";
@@ -59,7 +59,9 @@ if(
     $sql.=" , ";
     $sql.=$partido["goles_ambas_partes"];
     $sql.=" , ";
-    $sql.=$partido["diferencia_goles_descanso_final"];
+    $sql.=$partido["diferencia_goles_descanso_final_local"];
+    $sql.=" , ";
+    $sql.=$partido["diferencia_goles_descanso_final_visitante"];
     $sql.=" , ";
     $sql.=$partido["local_gf_descanso"];
     $sql.=" , ";
