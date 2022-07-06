@@ -110,7 +110,8 @@ function crear_tabla(obj_partidos_hoy){
         ,"ambos_marcan"
         ,"temporadas_id"
         ,"goles_ambas_partes"
-        ,"diferencia_goles_descanso_final"
+        ,"diferencia_goles_descanso_final_local"
+        ,"diferencia_goles_descanso_final_visitante"
         ,"mas_15_final"
         ,"local_gf_final"
         ,"local_gc_final"
@@ -122,11 +123,22 @@ function crear_tabla(obj_partidos_hoy){
         ,"visitante_gc_descanso"
     ]);
 
+    let fecha = obj_pintar.fecha;
+
     Object.values(obj_pintar.liga).forEach(function(c){
         let liga = c.competicion;
         let pais = c.pais;
-        let fecha = c.fecha;
+        if(typeof  fecha == "undefined"){
+            fecha = false;
+        }
+        let ano = new Date().getFullYear();
+        if(fecha != false){
+            fecha = fecha.slice(0,5).replace("/","-")+"-"+ano;
+        }
+        let temporada = temporada_fun(ano);
         Object.values(c.partidos).forEach(function(d){
+
+            //restultado descanso
             let res_descanso = "";
             if(typeof d.resultado_descanso == "undefined" ){
                 res_descanso = "Sin comenzar";
@@ -134,6 +146,35 @@ function crear_tabla(obj_partidos_hoy){
                 res_descanso = d.resultado_descanso;
 
             }
+            //Resultado final
+            let res_final = "";
+            res_final = "("+d.resultado_casa+" - "+d.resultado_visitante+")";
+
+            // Resultado final signo
+            let res_final_signo = resultado_signo(res_final);
+            // Resultado descanso signo
+            let res_descanso_signo = resultado_signo(res_descanso);
+            // Mas de 05 descanso
+            let mas_05_descanso = mas05(res_descanso);
+            // Mas de 15 descanso
+            let mas_15_descanso = mas15(res_descanso);
+            // Mas de 15 final
+            let mas_15_final = mas15(res_final);
+            // Mas de 25 final
+            let mas_25_final = mas25(res_final);
+            // ambos marcan
+            let ambos_marcan = ambos_marcan_fun(res_final);
+            //goles ambas partes
+            let goles_ambas_partes = goles_ambas_partes_fun(res_descanso,res_final);
+            //goles favor local descanso
+            let goles_favor_descanso_local = goles_favor_descanso_local_fun(res_descanso);
+            //goles encontra local descanso
+            let goles_contra_descanso_local = goles_contra_descanso_local_fun(res_descanso);
+
+            let diferencia_goles_descanso_final_local = diferencia_goles_descanso_final_local_fun(res_descanso,res_final);
+            let diferencia_goles_descanso_final_visitante = diferencia_goles_descanso_final_visitante_fun(res_descanso,res_final);
+
+            //CUOTAS
             let cuota_casa = "";
             let cuota_empate = "";
             let cuota_visitante = "";
@@ -151,29 +192,30 @@ function crear_tabla(obj_partidos_hoy){
                     ,liga
                     ,d.equipo_casa
                     ,d.equipo_visitante
-                    ,"resultado_final"
-                    ,"resultado_descanso"
-                    ,"cuota_1"
-                    ,"cuota_x"
-                    ,"cuota_2"
-                    ,"resultado_final_signo"
-                    ,"resultado_descanso_signo"
-                    ,"mas_05_descanso"
-                    ,"mas_15_descanso"
-                    ,"mas_25_final"
-                    ,"ambos_marcan"
-                    ,"temporadas_id"
-                    ,"goles_ambas_partes"
-                    ,"diferencia_goles_descanso_final"
-                    ,"mas_15_final"
-                    ,"local_gf_final"
-                    ,"local_gc_final"
-                    ,"visitante_gf_final"
-                    ,"visitante_gc_final"
-                    ,"local_gf_descanso"
-                    ,"local_gc_descanso"
-                    ,"visitante_gf_descanso"
-                    ,"visitante_gc_descanso"
+                    ,res_final
+                    ,res_descanso
+                    ,cuota_casa
+                    ,cuota_empate
+                    ,cuota_visitante
+                    ,res_final_signo
+                    ,res_descanso_signo
+                    ,mas_05_descanso
+                    ,mas_15_descanso
+                    ,mas_25_final
+                    ,ambos_marcan
+                    ,temporada
+                    ,goles_ambas_partes
+                    ,diferencia_goles_descanso_final_local
+                    ,diferencia_goles_descanso_final_visitante
+                    ,mas_15_final
+                    ,d.resultado_casa
+                    ,d.resultado_visitante
+                    ,d.resultado_visitante
+                    ,d.resultado_casa
+                    ,goles_favor_descanso_local
+                    ,goles_contra_descanso_local
+                    ,goles_contra_descanso_local
+                    ,goles_favor_descanso_local
             ]);
         });
     });
@@ -389,7 +431,129 @@ function lanzar_funcion(){
 }
 
 function filtrar_ligas(obj_ligas){
+    let obj_filtrado = {};
+    let contador = 0;
+    Object.values(obj_ligas.liga).forEach(function(a){
+        if(
+            a.competicion == "La Liga"
+            || a.competicion == "Segunda España"
+            || a.competicion == "Premier League"
+            || a.competicion == "Championschip"
+            || a.competicion == "Portugal Liga"
+            || a.competicion == "Ligue 1"
+            || a.competicion == "Ligue 2"
+            || a.competicion == "Bundesliga"
+            || a.competicion == "Serie A"
+            || a.competicion == "Eridivisie"
+        ){
+            contador++;
+            obj_filtrado[contador] = a;
+        }
+    });
+    obj_ligas.liga = obj_filtrado;
     return obj_ligas;
+}
+function resultado_signo(res_partido){
+    let signo = false;
+    let res_local = res_partido.slice(1,2);
+    let res_visitante = res_partido.slice(5,6);
+    if(parseInt(res_local) == parseInt(res_local)){
+        signo = "X";
+    }else if(parseInt(res_local) > parseInt(res_local)){
+        signo = "1";
+    }else{
+        signo = "2";
+    }
+    return signo;
+}
+function mas05(res_partido){
+    let res = 0;
+    let res_local = res_partido.slice(1,2);
+    let res_visitante = res_partido.slice(5,6);
+    let mas05 = parseInt(res_local) + parseInt(res_local);
+    if(mas05 > 0.5){
+        res = 1 ;
+    }
+    return res;
+}
+function mas15(res_partido){
+    let res = 0;
+    let res_local = res_partido.slice(1,2);
+    let res_visitante = res_partido.slice(5,6);
+    let mas05 = parseInt(res_local) + parseInt(res_local);
+    if(mas05 > 1.5){
+        res = 1 ;
+    }
+    return res;
+}
+function mas25(res_partido){
+    let res = 0;
+    let res_local = res_partido.slice(1,2);
+    let res_visitante = res_partido.slice(5,6);
+    let mas05 = parseInt(res_local) + parseInt(res_local);
+    if(mas05 > 2.5){
+        res = 1 ;
+    }
+    return res;
+}
+function ambos_marcan_fun(res_partido){
+    let res = 0;
+    let res_local = res_partido.slice(1,2);
+    let res_visitante = res_partido.slice(5,6);
+    let res_sum_ambos = parseInt(res_local) + parseInt(res_local);
+    if(res_sum_ambos > 0){
+        res = 1 ;
+    }
+    return res;
+}
+function goles_ambas_partes_fun(res_descanso,res_final){
+    let res = 0;
+    let res_local_des = res_descanso.slice(1,2);
+    let res_visitante_des = res_descanso.slice(5,6);
+    let res_local_fin = res_final.slice(1,2);
+    let res_visitante_fin = res_final.slice(5,6);
+    let sum_des = parseInt(res_local_des)+parseInt(res_visitante_des);
+    let sum_fin = parseInt(res_local_fin)+parseInt(res_visitante_fin);
+    if(sum_des>0 && sum_fin>0 ){
+        res = 1;
+    }
+    return res ;
+}
+function temporada_fun(ano){
+    let temporada = "";
+    let ano_1 = parseInt(ano.toString().slice(2,4));
+    let ano_2 = parseInt(ano.toString().slice(2,4))+1;
+    let mes = new Date().getMonth()+1;
+    if(mes >=7){
+        temporada = ano_1+"/"+ano_2;
+    }else{
+        temporada = ano_2+"/"+ano_1;
+    }
+    return temporada;
+}
+function goles_favor_descanso_local_fun(res_descanso){
+    let res = 0;
+    res = res_descanso.slice(1,2);
+    return res;
+}
+function goles_contra_descanso_local_fun(res_descanso){
+    let res = 0;
+    res = res_descanso.slice(5,6);
+    return res;
+}
+function diferencia_goles_descanso_final_local_fun(res_descanso,res_final){
+    let diferencia = 0;
+    res_descanso = parseInt(res_descanso.slice(1,2));
+    res_final = parseInt(res_final.slice(1,2));
+    diferencia = res_final - res_descanso;
+    return diferencia;
+}
+function diferencia_goles_descanso_final_visitante_fun(res_descanso,res_final){
+    let diferencia = 0;
+    res_descanso = parseInt(res_descanso.slice(5,6));
+    res_final = parseInt(res_final.slice(5,6));
+    diferencia = res_final - res_descanso;
+    return diferencia;
 }
 
 //ejecucion
