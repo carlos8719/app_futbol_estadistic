@@ -18,6 +18,8 @@ $DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
 <script type="text/javascript" src="/front_end/controlador/cargaResultados.js"></script>
 <script type="text/javascript" src="/front_end/modelo/cargaResultados.js"></script>
 
+<!-- estilos -->
+<link rel="stylesheet" type="text/css" href="/front_end/estilos/general.css" media="screen" />
 
 <!-- login -->
 <script type="text/javascript" src="/front_end/vista/login.js"></script>
