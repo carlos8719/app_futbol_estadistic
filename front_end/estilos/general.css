@@ -102,3 +102,294 @@ a{
 .header__text {
     font-weight: 700;
 }
+
+
+
+/* MENU */
+
+
+.menuTop, .menuTop__content {
+    background-color: #001e28;
+    display: grid;
+}
+.menuTop {
+    user-select: none;
+}
+.container, .footerContainer, .fsNewsMenu, .header, .menuTop, .seoTop, .x24network {
+    grid-template: " . content . " auto/1fr 1048px 1fr;
+}
+.menuTop__content {
+    grid-area: content;
+    grid-auto-flow: column;
+    grid-template-columns: max-content 1fr max-content;
+    grid-template-rows: 48px;
+    position: relative;
+}
+.menuTop, .menuTop__content {
+    background-color: #001e28;
+    display: grid;
+}
+
+.menuTop__items {
+    display: flex;
+    flex-flow: row wrap;
+    overflow: hidden;
+}
+
+.menuTop__item--active {
+    color: red;
+}
+
+.menuTop__icon {
+    grid-area: icon;
+    height: 20px;
+    margin-right: 8px;
+    width: 20px;
+}
+
+.menuTop__text {
+    grid-area: text;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.menuTop {
+    user-select: none;
+}
+
+.menuTop__item--active:before {
+    background-color: red;
+    border-radius: 1.5px 1.5px 0 0;
+    content: "";
+    grid-area: border;
+    height: 100%;
+    width: 100%;
+}
+.menuTop__item {
+    color: #c8cdcd;
+    cursor: pointer;
+    display: grid;
+    font-weight: 700;
+    grid-template:
+        var(--grid-template,
+        " . . . . " 8px
+        " . icon text . " 20px
+        " . . . . " 16px
+        " . border border . " 4px/14px max-content max-content 14px);
+    place-items: center;
+    position: relative;
+}
+.menuTop {
+    user-select: none;
+}
+
+/* CONTAINER */
+
+.container {
+    display: grid;
+    grid-template: " . content . " auto/1fr 1048px 1fr;
+}
+.container__content {
+    background-color: #010a0f;
+    grid-area: content;
+    position: relative;
+}
+
+.container__mainInner {
+    display: grid;
+    grid-template:
+        " myMenu liveTable tvProgram " auto
+        " myMenu liveTable bannerZone " minmax(calc(100vh - 125px),1fr) /172px 688px auto;
+    padding-top: 24px;
+    position: relative;
+}
+
+.container__bannerZone {
+    grid-area: bannerZone;
+}
+
+.container__liveTableWrapper {
+    border-radius: 8px;
+    grid-area: liveTable;
+}
+.container__myMenu {
+    grid-area: myMenu;
+    margin: 0 8px;
+}
+
+.category-page .container__livetable, .isSportPage .container__livetable, .myfs .container__livetable {
+    background-color: #00141e;
+}
+.container__livetable {
+    border-radius: 8px;
+}
+.container__fsbody {
+    background-color: var(--color-combination-9);
+    border-radius: 8px;
+    padding: 16px 12px 4px;
+}
+
+#live-table {
+    position: relative;
+    box-sizing: border-box;
+}
+
+.event {
+    font-size: 13px;
+    color: #c8cdcd;
+}
+section {
+    display: block;
+}
+
+body .soccer {
+    --color-sport-primary: #085f00;
+}
+
+.event__header {
+    min-height: 39px;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #001e28;
+    position: relative;
+    display: grid;
+    grid-template-columns: 32px 1fr minmax(31px, auto);
+    grid-auto-flow: column;
+    grid-template-areas: "check title .";
+    border-top: solid 1px #00141e;
+    border-radius: 8px;
+}
+
+
+.event__header.top {
+    background-color: #001e28;
+}
+
+.event__header .event__title {
+    grid-area: title;
+}
+
+.event__header.top .event__titleBox {
+    color: #ffcd00;
+}
+.event__header.top .event__title--name {
+    grid-area: name;
+    color: #ffcd00;
+}
+.event__header.top .event__title--type {
+    grid-area: name;
+    /* color: #ffcd00; */
+}
+
+.event__header.event__title--name {
+    grid-area: name;
+}
+
+.event__title--name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+
+
+.event__header:first-of-type {
+    margin-top: 0;
+}
+
+.event__header .event__title--type {
+    grid-area: type;
+}
+
+.event__header .event__title--type {
+    font-size: 13px;
+    font-weight: bold;
+    overflow: visible;
+}
+
+.event__title--type {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.event .soccer .event__match--twoLine {
+    grid-template:
+        " check dropdown stageOrTime homeLogo homeParticipant homeScore homePart1 homePart2 iconStr iconInf iconTv iconStd liveIcon" minmax(23px, auto)
+        " check dropdown stageOrTime awayLogo awayParticipant awayScore awayPart1 awayPart2 iconStr iconInf iconTv iconStd liveIcon" minmax(23px, auto) / max-content var(--width-dropdown, 0) 69px var(--width-logo, 0) 1fr 34px 34px 34px 28px 24px 24px 38px 31px;
+}
+
+.event__header + .event__match {
+    margin-top: 1px;
+}
+.theme--dark .event__match--twoLine {
+    color: #eee;
+}
+.event__match:not(.event__main) {
+    color: #eee;
+}
+.event__match {
+    --width-live: 46px;
+}
+@media screen and (min-width: 799px)
+.event__match--twoLine {
+    position: relative;
+}
+.event__match--twoLine {
+    display: grid;
+    color: #00141e;
+}
+.event__match {
+    border-bottom: solid 1px #0f2d37;
+    box-sizing: border-box;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+
+.event .event__participant--home {
+    grid-area: homeParticipant;
+}
+.event .event__participant {
+    grid-area: participant;
+}
+
+.event__match--twoLine .event__participant {
+    display: flex;
+    align-items: center;
+    hyphens: auto;
+}
+.event__participant {
+    flex: 1;
+    padding: 2px 0;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: break-word;
+}
+
+.event .event__participant--away {
+    grid-area: awayParticipant;
+}
+
+.event .event__participant {
+    grid-area: participant;
+}
+.event__match--twoLine .event__participant {
+    display: flex;
+    align-items: center;
+    hyphens: auto;
+}
+.event__participant {
+    flex: 1;
+    padding: 2px 0;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-break: break-word;
+}
+.event__match--twoLine::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    right: 144px;
+    width: 1px;
+    height: calc(100% - 12px);
+    background: var(--color-combination-8);
+}
