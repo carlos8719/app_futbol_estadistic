@@ -435,8 +435,8 @@ function filtrar_ligas(obj_ligas){
     let contador = 0;
     Object.values(obj_ligas.liga).forEach(function(a){
         if(
-            a.competicion == "La Liga"
-            || a.competicion == "Segunda España"
+            a.competicion == "LaLiga Santander"
+            || a.competicion == "LaLiga SmartBank"
             || a.competicion == "Premier League"
             || a.competicion == "Championschip"
             || a.competicion == "Portugal Liga"
@@ -444,10 +444,20 @@ function filtrar_ligas(obj_ligas){
             || a.competicion == "Ligue 2"
             || a.competicion == "Bundesliga"
             || a.competicion == "Serie A"
-            || a.competicion == "Eridivisie"
+            || a.competicion == "Eredivisie"
         ){
-            contador++;
-            obj_filtrado[contador] = a;
+            if(
+                a.pais == "FRACIA"
+                || a.pais == "INGLATERRA"
+                || a.pais == "ITALIA"
+                || a.pais == "PAÍSES BAJOS"
+                || a.pais == "ALEMANIA"
+                || a.pais == "PORTUGAL"
+                || a.pais == "ESPAÑA"
+            ){
+                contador++;
+                obj_filtrado[contador] = a;
+            }
         }
     });
     obj_ligas.liga = obj_filtrado;

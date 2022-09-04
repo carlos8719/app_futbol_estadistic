@@ -2,7 +2,7 @@
 <div class="header">
     <div class="header_content">
         <a class="header_logo" href="#">
-            <img class="header_logo_svg" src="/front_end/img/logo_canal_edit.png">
+            <!-- <img class="header_logo_svg" src="/front_end/img/logo_canal_edit.png"> -->
             <span class="header__slogan"></span>
         </a>
         <div id="searchWindow" class="header__block header__block--search">

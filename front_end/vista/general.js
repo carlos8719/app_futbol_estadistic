@@ -37,7 +37,22 @@ class VistaGeneral{
         html.a2 = document.createElement("div");
         html.a2.className = "menuTop__text";
         html.a2.innerHTML = "Partidos";
+        html.a2.addEventListener("click",()=>{
+
+        });
         html.enlace1.appendChild(html.a2);
+
+        html.enlace2 = document.createElement("div");
+        html.enlace2.className = " menuTop__item";
+        html.menu.appendChild(html.enlace2);
+
+        html.a3 = document.createElement("div");
+        html.a3.className = "menuTop__text";
+        html.a3.innerHTML = "Equipos";
+        html.a3.addEventListener("click",()=>{
+
+        });
+        html.enlace2.appendChild(html.a3);
 
         return html;
     }

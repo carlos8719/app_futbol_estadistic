@@ -8,4 +8,5 @@ global.funciones.vista.cargaResultado = new VistaCargaResultado();
 global.funciones.controlador.cargaResultado = new ControladorCargaResultado();
 global.funciones.modelo.cargaResultado = new ModeloCargaResultado();
 
+global.funciones.vista.jornada = new VistaJornadas();
 </script>
